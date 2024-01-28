@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using DataAccess.Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,17 @@ namespace DataAccess.Context
 {
     public class AppDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public DbSet<Valyuta> Valyutas { get; set; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) :
+            base(options)
         {
-            optionsBuilder.UseSqlServer(
-                "server=WIN-VD08C7OPT8H\\SQLEXPRESS; database=ValyutaAPIDB; integrated security=true;"
-                );
+
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=WIN-VD08C7OPT8H\\SQLEXPRESS; Database=CurrencyAPIDB69;Trusted_Connection=true; Encrypt=false;");
+        //}
     }
 }
